@@ -4,12 +4,12 @@ REM goto to just below trunk and tags directory, assume ran in trunk directory
 CD ..
 
 ECHO tag SVN with release version - svn copy trunk/ tags/ke%1
-svn copy https://freedos.svn.sourceforge.net/svnroot/freedos/kernel/trunk/ https://freedos.svn.sourceforge.net/svnroot/freedos/kernel/tags/ke%1 -m "Tag kernel release %1"
+svn copy https://svn.code.sf.net/p/freedos/svn/kernel/trunk/ https://svn.code.sf.net/p/freedos/svn/kernel/tags/ke%1 -m "Tag kernel release %1"
 PAUSE
 ECHO svn export to get clean tree
 if EXIST SOURCE RMDIR /S /Q SOURCE > NUL
-svn export https://freedos.svn.sourceforge.net/svnroot/freedos/kernel/tags/ke%1 SOURCE\ke%1
-REM svn export https://freedos.svn.sourceforge.net/svnroot/freedos/kernel/trunk SOURCE\ke%1
+svn export https://svn.code.sf.net/p/freedos/svn/kernel/tags/ke%1 SOURCE\ke%1
+REM svn export https://svn.code.sf.net/p/freedos/svn/kernel/trunk SOURCE\ke%1
 
 SET VERSION=%1
 SET LSMRET=SRC
@@ -44,7 +44,7 @@ GOTO DONE
 
 :BZK
 ECHO build kernel %VERSION%
-CALL build.bat /D KERNEL_VERSION /V "%1 " 86 upx fat%FAT%
+CALL build.bat /D KERNEL_VERSION /V "%1 " 86 win upx fat%FAT%
 DEL BIN\K??86??.sys
 SET LSMRET=BZK_2
 SET LSMFILE=docs\fdkernel.lsm
@@ -78,7 +78,7 @@ ECHO Author:         (developers: can be reached on the freedos-kernel mailing l
 ECHO Maintained-by:  freedos-kernel@lists.sourceforge.net>>%LSMFILE%
 ECHO Primary-site:   http://freedos.sourceforge.net/kernel/>>%LSMFILE%
 ECHO Alternate-site: http://www.fdos.org/kernel/>>%LSMFILE%
-ECHO Alternate-site: https://freedos.svn.sourceforge.net/svnroot/freedos>>%LSMFILE%
+ECHO Alternate-site: https://svn.code.sf.net/p/freedos/svn/>>%LSMFILE%
 ECHO Original-site:  http://www.gcfl.net/pub/FreeDOS/kernel>>%LSMFILE%
 ECHO Platforms:      DOS, FreeDOS, DOSEMU (OpenWatcom C or Turbo C, NASM, UPX)>>%LSMFILE%
 ECHO Copying-policy: GPL2>>%LSMFILE%
